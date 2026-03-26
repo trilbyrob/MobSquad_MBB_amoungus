@@ -4,7 +4,7 @@
     "name": "MobSquad:mbb_among-us",
     "description": "Among Us style minigame tools for Minecraft Bedrock",
     "uuid": "5bd9c82c-bf49-4cce-b2a0-9a28f9f8ffcf",
-    "version": [1, 0, 0],
+    "version": [1, 0, 1],
     "min_engine_version": [1, 21, 0]
   },
   "modules": [
@@ -12,13 +12,13 @@
       "type": "script",
       "language": "javascript",
       "uuid": "3b1652a4-8d16-4ffb-a7c0-9691a9b665b3",
-      "version": [1, 0, 0],
+      "version": [1, 0, 1],
       "entry": "scripts/main.js"
     },
     {
       "type": "data",
       "uuid": "d3c42d35-606e-4b49-8260-6874cda2e37b",
-      "version": [1, 0, 0]
+      "version": [1, 0, 1]
     }
   ],
   "dependencies": [

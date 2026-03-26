@@ -2,21 +2,13 @@ import { world, system, Player } from "@minecraft/server";
 
 /*
     MobSquad:mbb_among-us
-    Held-item test version
-
-    This version:
-    - shows startup message
-    - gives each player one imposters book once
-    - only triggers the effect if the attacking player is holding mobsquadmbb:imposters_book
-    - for testing on animals/mobs:
-        - places a gold block where the hit happened
-        - teleports the hit entity upward
+    Debug player-hit version
 */
 
 const playersGivenBook = new Set<string>();
 
 system.runTimeout(() => {
-    world.sendMessage("§aMobSquad:mbb_among-us script has started.");
+    world.sendMessage("§aMobSquad script has started.");
 }, 40);
 
 system.runInterval(() => {
@@ -26,8 +18,8 @@ system.runInterval(() => {
         const playerId = player.id;
 
         if (!playersGivenBook.has(playerId)) {
-            player.runCommand("give @s mobsquadmbb:imposters_book 1");
-            player.sendMessage("§6You have been given the Imposters book.");
+            player.runCommand("give @s mobsquadmbb:pirates_book 1");
+            player.sendMessage("§6You have been given the pirates book.");
             playersGivenBook.add(playerId);
         }
     }
@@ -37,64 +29,73 @@ world.afterEvents.entityHitEntity.subscribe((event) => {
     const damagingEntity = event.damagingEntity;
     const hitEntity = event.hitEntity;
 
-    // Only continue if the attacker is a player
+    // Is attacker a player?
     if (damagingEntity.typeId !== "minecraft:player") {
         return;
     }
 
     const attackingPlayer = damagingEntity as Player;
+    attackingPlayer.sendMessage("§7Hit event fired.");
 
-    // Get the item the player is currently holding
+    // Is victim a player?
+    if (hitEntity.typeId !== "minecraft:player") {
+        attackingPlayer.sendMessage("§cTarget is not a player: " + hitEntity.typeId);
+        return;
+    }
+
+    attackingPlayer.sendMessage("§aTarget is a player.");
+
+    // Check held item
     const inventoryComponent = attackingPlayer.getComponent("minecraft:inventory");
-
     if (!inventoryComponent) {
+        attackingPlayer.sendMessage("§cNo inventory component.");
         return;
     }
 
     const container = inventoryComponent.container;
-
     if (!container) {
+        attackingPlayer.sendMessage("§cNo container.");
         return;
     }
 
     const selectedSlot = attackingPlayer.selectedSlotIndex;
     const selectedItem = container.getItem(selectedSlot);
 
-    // Only continue if the player is holding the custom imposters book
     if (!selectedItem) {
+        attackingPlayer.sendMessage("§cNo selected item.");
         return;
     }
 
-    if (selectedItem.typeId !== "mobsquadmbb:imposters_book") {
+    attackingPlayer.sendMessage("§eHolding: " + selectedItem.typeId);
+
+    if (selectedItem.typeId !== "mobsquadmbb:pirates_book") {
+        attackingPlayer.sendMessage("§cWrong item.");
         return;
     }
 
-    // Ignore hits on players for now - this test is still for animals/mobs
-    if (hitEntity.typeId === "minecraft:player") {
-        return;
-    }
+    attackingPlayer.sendMessage("§aCorrect item detected.");
 
-    // Get the location where the entity was hit
-    const hitX = Math.floor(hitEntity.location.x);
-    const hitY = Math.floor(hitEntity.location.y);
-    const hitZ = Math.floor(hitEntity.location.z);
+    const hitPlayer = hitEntity as Player;
 
-    // Place a gold block where the hit happened
-    hitEntity.dimension.runCommand(
+    const hitX = Math.floor(hitPlayer.location.x);
+    const hitY = Math.floor(hitPlayer.location.y);
+    const hitZ = Math.floor(hitPlayer.location.z);
+
+    hitPlayer.dimension.runCommand(
         "setblock " + hitX + " " + hitY + " " + hitZ + " gold_block"
     );
 
-    // Teleport the hit entity upward
-    hitEntity.teleport(
+    hitPlayer.teleport(
         {
-            x: hitEntity.location.x,
-            y: hitEntity.location.y + 130,
-            z: hitEntity.location.z
+            x: hitPlayer.location.x,
+            y: hitPlayer.location.y + 40,
+            z: hitPlayer.location.z
         },
         {
-            dimension: hitEntity.dimension
+            dimension: hitPlayer.dimension
         }
     );
 
-    attackingPlayer.sendMessage("§aImposters book hit detected on: " + hitEntity.typeId);
+    attackingPlayer.sendMessage("§aEffect applied.");
+    hitPlayer.sendMessage("§cYou were hit.");
 });

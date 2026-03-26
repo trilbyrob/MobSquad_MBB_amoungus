@@ -2,7 +2,7 @@
   "format_version": "1.21.0",
   "minecraft:item": {
     "description": {
-      "identifier": "mobsquadmbb:imposters_book",
+      "identifier": "mobsquadmbb:pirates_book",
       "menu_category": {
         "category": "equipment"
       }
