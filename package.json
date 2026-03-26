@@ -1,0 +1,19 @@
+{
+  "name": "death-stick-addon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@minecraft/server": "^2.6.0"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.2"
+  },
+  "description": ""
+}
