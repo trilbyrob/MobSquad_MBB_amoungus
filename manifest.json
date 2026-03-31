@@ -1,9 +1,9 @@
 {
   "format_version": 2,
   "header": {
-    "name": "MobSquad:mbb_among-us",
-    "description": "Among Us style minigame tools for Minecraft Bedrock",
-    "uuid": "5bd9c82c-bf49-4cce-b2a0-9a28f9f8ffcf",
+    "name": "Youre_It",
+    "description": "Hot Tag minigame for Minecraft Bedrock",
+    "uuid": "e34656e4-b5c8-43d1-984f-70bf08efaab0",
     "version": [1, 0, 1],
     "min_engine_version": [1, 21, 0]
   },
@@ -11,13 +11,13 @@
     {
       "type": "script",
       "language": "javascript",
-      "uuid": "3b1652a4-8d16-4ffb-a7c0-9691a9b665b3",
+      "uuid": "6269f083-fd0f-4d9e-80ea-2b655833a6ef",
       "version": [1, 0, 1],
       "entry": "scripts/main.js"
     },
     {
       "type": "data",
-      "uuid": "d3c42d35-606e-4b49-8260-6874cda2e37b",
+      "uuid": "debb84af-065b-4521-8d94-497fbfbdcf35",
       "version": [1, 0, 1]
     }
   ],

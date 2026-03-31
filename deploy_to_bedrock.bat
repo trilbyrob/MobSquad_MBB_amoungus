@@ -17,7 +17,8 @@ if "%PROJECT_DIR:~-1%"=="\" set "PROJECT_DIR=%PROJECT_DIR:~0,-1%"
 REM --------------------------------------------------
 REM Pack name / target folder name in Bedrock
 REM --------------------------------------------------
-set "PACK_FOLDER=MobSquad_MBB_amoungus"
+REM Use current folder name as pack folder name
+for %%I in ("%PROJECT_DIR%") do set "PACK_FOLDER=%%~nxI"
 
 REM --------------------------------------------------
 REM Bedrock development behavior packs folder

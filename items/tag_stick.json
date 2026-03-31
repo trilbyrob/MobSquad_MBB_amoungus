@@ -2,14 +2,14 @@
   "format_version": "1.21.0",
   "minecraft:item": {
     "description": {
-      "identifier": "mobsquadmbb:pirates_book",
+      "identifier": "youreit:tag_stick",
       "menu_category": {
         "category": "equipment"
       }
     },
     "components": {
       "minecraft:max_stack_size": 1,
-      "minecraft:icon": "book",
+      "minecraft:icon": "youreit:tag_stick", 
       "minecraft:display_name": {
         "value": "Book"
       },
